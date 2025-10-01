@@ -5,7 +5,7 @@ if [ ! -x "$(command -v docker)" ]; then
     exit 1
 fi
 
-QGIS_DOCKER_TAG=3.36-noble
+QGIS_DOCKER_TAG=3.40
 
 DOCKER_IMAGE="qgis/qgis:${QGIS_DOCKER_TAG}"
 BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -14,10 +14,12 @@ if [ "x$1" = "xexec" ]; then
     docker run --rm -it \
         -u ${UID} \
         -e DISPLAY=${DISPLAY} \
+        -e XDG_RUNTIME_DIR=/run/user/${UID} \
         -v /etc/passwd:/etc/passwd:ro \
         -v ${HOME}:${HOME} \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
         -v ${HOME}/.Xauthority:${HOME}/.Xauthority \
+        -v /run/user/${UID}:/run/user/${UID}:ro \
         ${DOCKER_IMAGE} \
         qgis
     exit 0

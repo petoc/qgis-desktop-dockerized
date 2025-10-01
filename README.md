@@ -5,6 +5,12 @@ Dockerized QGIS desktop application.
 ## Requirements
 
 To use this script, Docker Engine has to be installed.
+User `docker` has to be able to connect to X server.
+
+```sh
+# allow docker user on local machine to connect to X server
+xhost +local:docker
+```
 
 ## Compatibility
 
